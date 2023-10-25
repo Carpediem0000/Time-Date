@@ -155,8 +155,13 @@ bool Time_::operator!=(const Time_& obj) const&
 bool Time_::operator>(const Time_& obj) const&
 {
 	if (this->hour > obj.hour) return true;
-	else if (this->minutes > obj.minutes) return true;
-	else if (this->seconds > obj.seconds) return true;
+	else if (this->hour < obj.hour) return false;
+
+	if (this->minutes > obj.minutes) return true;
+	else if (this->minutes < obj.minutes) return false;
+
+	if (this->seconds > obj.seconds) return true;
+
 	return false;
 }
 
@@ -279,4 +284,88 @@ Time_ Time_::operator-(long h) const&
 	Time_ tmp = *this;
 	tmp -= h;
 	return tmp;
+}
+
+Time_& Time_::operator--()
+{
+	return *this -= 1.0f;
+}
+
+Time_ Time_::operator--(int)
+{
+	Time_ tmp = *this;
+	*this -= 1.0f;
+	return tmp;
+}
+
+Time_& Time_::operator++()
+{
+	return *this += 1.0f;
+}
+
+Time_ Time_::operator++(int)
+{
+	Time_ tmp = *this;
+	*this += 1.0f;
+	return tmp;
+}
+
+Time_ operator+(int seconds, const Time_& a)
+{
+	return a + seconds;
+}
+
+Time_ operator-(int seconds, const Time_& a)
+{
+	return a - seconds;
+}
+
+Time_ operator+(float minutes, const Time_& a)
+{
+	return a + minutes;
+}
+
+Time_ operator-(float minutes, const Time_& a)
+{
+	return a - minutes;
+}
+
+Time_ operator+(long hours, const Time_& a)
+{
+	return a + hours;
+}
+
+Time_ operator-(long hours, const Time_& a)
+{
+	return a + hours;
+}
+
+ostream& operator<<(ostream& os, const Time_& t)
+{
+	if (t.format)
+	{
+		os << t.hour / 10 << t.hour % 10 << ":" << t.minutes / 10 << t.minutes % 10 << ":" << t.seconds / 10 << t.seconds % 10 << endl;
+	}
+	else
+	{
+		if (t.hour > t.MAX_HOUR_AM_PM)
+		{
+			os << (t.hour - t.MAX_HOUR_AM_PM - 1) / 10 << (t.hour - t.MAX_HOUR_AM_PM - 1) % 10 << ":" << t.minutes / 10 << t.minutes % 10 << ":" << t.seconds / 10 << t.seconds % 10 << " p.m" << endl;
+		}
+		else
+		{
+			os << t.hour / 10 << t.hour % 10 << ":" << t.minutes / 10 << t.minutes % 10 << ":" << t.seconds / 10 << t.seconds % 10 << " a.m" << endl;
+		}
+	}
+	return os;
+}
+
+istream& operator>>(istream& is, Time_& t)
+{
+	do
+	{
+		cout << "hour minut second => ";
+		is >> t.hour >> t.minutes >> t.seconds;
+	} while (!t.valid());
+	return is;
 }
