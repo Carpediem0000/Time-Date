@@ -54,6 +54,23 @@ public:
 	Date operator + (long years)const&; //добавить years лет к дате
 	Date operator - (long years)const&; //вычесть years лет из даты
 	int operator - (const Date& obj)const&;
+	
+	Date& operator -- ();
+	Date operator -- (int);
+	Date& operator ++ ();
+	Date operator ++ (int);
 
+	friend Date operator + (int days, const Date& a);
+	friend Date operator - (int days, const Date& a);
+
+	friend Date operator + (float months, const Date& a);
+	friend Date operator - (float months, const Date& a);
+
+	friend Date operator + (long years, const Date& a);
+	friend Date operator - (long years, const Date& a);
+
+
+	friend ostream& operator << (ostream& os, const Date& t);
+	friend istream& operator >> (istream& is, Date& t);
 };
 
