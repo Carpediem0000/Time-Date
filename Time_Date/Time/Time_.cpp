@@ -344,17 +344,17 @@ ostream& operator<<(ostream& os, const Time_& t)
 {
 	if (t.format)
 	{
-		os << t.hour / 10 << t.hour % 10 << ":" << t.minutes / 10 << t.minutes % 10 << ":" << t.seconds / 10 << t.seconds % 10 << endl;
+		os << t.hour / 10 << t.hour % 10 << ":" << t.minutes / 10 << t.minutes % 10 << ":" << t.seconds / 10 << t.seconds % 10;
 	}
 	else
 	{
 		if (t.hour > t.MAX_HOUR_AM_PM)
 		{
-			os << (t.hour - t.MAX_HOUR_AM_PM - 1) / 10 << (t.hour - t.MAX_HOUR_AM_PM - 1) % 10 << ":" << t.minutes / 10 << t.minutes % 10 << ":" << t.seconds / 10 << t.seconds % 10 << " p.m" << endl;
+			os << (t.hour - t.MAX_HOUR_AM_PM - 1) / 10 << (t.hour - t.MAX_HOUR_AM_PM - 1) % 10 << ":" << t.minutes / 10 << t.minutes % 10 << ":" << t.seconds / 10 << t.seconds % 10 << " p.m";
 		}
 		else
 		{
-			os << t.hour / 10 << t.hour % 10 << ":" << t.minutes / 10 << t.minutes % 10 << ":" << t.seconds / 10 << t.seconds % 10 << " a.m" << endl;
+			os << t.hour / 10 << t.hour % 10 << ":" << t.minutes / 10 << t.minutes % 10 << ":" << t.seconds / 10 << t.seconds % 10 << " a.m";
 		}
 	}
 	return os;
